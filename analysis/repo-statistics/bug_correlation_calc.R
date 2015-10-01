@@ -6,7 +6,7 @@ library(ellipse)
 
 bug.counts <- read.csv("data/bug_correlation_counters.csv")
 
-bug.counts$SECURITY <- bug.counts$SECURITY_HIGH + bug.counts$SECURITY_LOW
+bug.counts$SECURITY <- bug.counts$INPUT_VALIDATION_BUGS + bug.counts$SECURITY_REST
 
 bug.counts$MALICIOUS_CODE <- NULL
 

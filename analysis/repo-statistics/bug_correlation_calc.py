@@ -11,9 +11,8 @@ import itertools
 from corrplot import corrplot
 
 bug_types = [
-    'SECURITY_HIGH',
-    'SECURITY_LOW',
-    'SECURITY',
+    'INPUT_VALIDATION_BUGS',
+    'SECURITY_REST',
     'MALICIOUS_CODE',
     'STYLE',
     'BAD_PRACTICE',
@@ -30,30 +29,6 @@ with open("data/bug_correlation_counters.json") as infile:
 data = pd.DataFrame(json_input).T
 
 print "Raw"
-for bug_type in bug_types:
-    if bug_type in data:
-        count = data[bug_type].count()
-    else:
-        count = 0
-    print bug_type, count
-
-sec_high = np.where(data['SECURITY_HIGH'].notnull())[0]
-sec_low = np.where(data['SECURITY_LOW'].notnull())[0]
-intersection_sec = np.intersect1d(sec_high, sec_low)
-
-data['SECURITY'] = (data['SECURITY_HIGH'].fillna(0)
-                    + data['SECURITY_LOW'].fillna(0)).replace(0, np.nan)
-                                                
-data['TOTAL_SECURITY'] = (data['TOTAL_SECURITY_HIGH'].fillna(0)
-                          + data['TOTAL_SECURITY_LOW'].fillna(0)
-                      ).replace(0, np.nan)
-data = data.drop(['SECURITY_LOW', 'TOTAL_SECURITY_LOW',
-                  'SECURITY_HIGH', 'TOTAL_SECURITY_HIGH'], axis=1)
-bug_types.remove('SECURITY_LOW')
-bug_types.remove('SECURITY_HIGH')
-
-print "After handling SECURITY ({} common)".format(len(intersection_sec))
-
 for bug_type in bug_types:
     if bug_type in data:
         count = data[bug_type].count()

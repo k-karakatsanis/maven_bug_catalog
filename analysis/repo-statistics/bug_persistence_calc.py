@@ -7,7 +7,8 @@ import scipy.stats as st
 import collections
 
 bug_types_closed = collections.OrderedDict()
-bug_types_closed['SECURITY'] = []
+bug_types_closed['INPUT_VALIDATION_BUGS'] = []
+bug_types_closed['SECURITY_REST'] = []
 bug_types_closed['MALICIOUS_CODE'] = []
 bug_types_closed['STYLE'] =  []
 bug_types_closed['CORRECTNESS'] = []
@@ -18,7 +19,8 @@ bug_types_closed['PERFORMANCE'] = []
 bug_types_closed['EXPERIMENTAL'] = []
 
 bug_labels = [
-    'Security',
+    'Input_Validation_Bugs',
+    'Security_Rest',
     'Malicious Code',
     'Style',
     'Correctness',
@@ -51,8 +53,6 @@ with open("data/bug_persistence.json", "r") as json_file:
         for bug in bugs_opened.keys():
             if bug not in bugs:
                 bug_type = bug.partition('||')[0]
-                if bug_type == 'SECURITY_LOW' or bug_type == 'SECURITY_HIGH':
-                    bug_type = 'SECURITY'
                 diff = version_order - bugs_opened[bug]
                 bug_types_closed[bug_type].append(diff)
                 if diff < 1:
