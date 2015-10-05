@@ -10,7 +10,8 @@ from collections import defaultdict, OrderedDict
 import itertools
 
 bug_types = (
-    'SECURITY',
+    'INPUT_VALIDATION_BUGS',
+    'SECURITY_REST',
     'MALICIOUS_CODE',
     'STYLE',
     'CORRECTNESS',
@@ -28,7 +29,8 @@ for bug_type in bug_types:
     bug_types_diffs[bug_type] = []
 
 bug_labels = {
-    'SECURITY': 'Security',
+    'INPUT_VALIDATION_BUGS': 'Input_Validation_Bugs',
+    'SECURITY_REST': 'SECURITY_REST',
     'MALICIOUS_CODE': 'Malicious Code',
     'STYLE': 'Style',
     'CORRECTNESS': 'Correctness',
@@ -63,16 +65,6 @@ with open("data/project_counters.json", "r") as json_file:
                 continue
             counts[project].append({})
             counters = version['Counters']
-            if 'SECURITY_LOW' in counters:
-                security_low = counters.pop('SECURITY_LOW')
-            else:
-                security_low = 0
-            if 'SECURITY_HIGH' in counters:
-                security_high = counters.pop('SECURITY_HIGH')
-            else:
-                security_high = 0
-            if security_low or security_high:
-                counters['SECURITY'] = security_low + security_high
             for counter, value in counters.iteritems():
                 if version_order != len(counts[project]):
                     bad_project = True
