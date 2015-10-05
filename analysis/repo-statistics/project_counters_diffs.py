@@ -30,7 +30,7 @@ for bug_type in bug_types:
 
 bug_labels = {
     'INPUT_VALIDATION_BUGS': 'Input_Validation_Bugs',
-    'SECURITY_REST': 'SECURITY_REST',
+    'SECURITY_REST': 'Security_Rest',
     'MALICIOUS_CODE': 'Malicious Code',
     'STYLE': 'Style',
     'CORRECTNESS': 'Correctness',
