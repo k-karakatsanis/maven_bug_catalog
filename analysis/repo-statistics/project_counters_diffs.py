@@ -130,7 +130,7 @@ for bug_type, bug_type_diffs in bug_types_diffs.iteritems():
 fig1 = plt.figure(1, figsize=(16, 10))
 
 num_plots = len(bug_types_diffs.keys())
-num_cols = 3
+num_cols = 4
 num_rows = num_plots / num_cols
 if num_rows % num_cols != 0:
     num_rows += 1
